@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-API_KEY = "600ec0e1d08c0a3daefabbcf24858c1e"  # Remplace par ta clé API
+API_KEY = "600ec0e1d08c0a3daefabbcf24858c1e"
 BASE_URL = "https://api.themoviedb.org/3"
 
 @app.route('/films/<int:page>/popular', methods=['GET'])

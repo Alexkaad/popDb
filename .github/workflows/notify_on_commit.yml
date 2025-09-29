@@ -19,4 +19,4 @@ jobs:
           token: ${{ secrets.MY_GITHUB_TOKEN}} # si fork
           repository: ${{ github.repository }}
           issue-number: 1
-          body: "📢 Notifications de commit #1 — Nouveau commit effectué par ${{ github.actor }} !"
+          body: "📢 Notifications de commit #1 — Nouveau commit effectué par: ${{ github.actor }} !"
