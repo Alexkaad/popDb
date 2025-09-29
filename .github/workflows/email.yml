@@ -15,4 +15,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           issue-number: 1
-          body: "📢 Nouveau commit effectué par ${{ github.actor }} !"
+          body: "📢 **Notifications de commit #1** — Nouveau commit effectué par ${{ github.actor }} !"
