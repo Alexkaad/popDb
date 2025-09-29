@@ -20,7 +20,7 @@ def get_films(page):
     if response.status_code == 200:
         data = response.json()
         films = data.get("results", [])
-        print(f"Nombre de films reçus : {len(films)}")
+       
         # On renvoie les 10 premiers films
         return jsonify([
             {
