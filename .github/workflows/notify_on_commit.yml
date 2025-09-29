@@ -3,7 +3,11 @@ name: Notify on Commit
 on:
   push:
     branches:
-      - "**"
+      - main
+
+permissions:
+  contents: read
+  issues: write
 
 jobs:
   comment:
@@ -15,4 +19,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           issue-number: 1
-          body: "📢 **Notifications de commit #1** — Nouveau commit effectué par ${{ github.actor }} !"
+          body: "📢 Nouveau commit effectué par ${{ github.actor }} !"
