@@ -1,26 +1,43 @@
+from flask import Flask, jsonify
 import requests
+
+app = Flask(__name__)
 
 API_KEY = "600ec0e1d08c0a3daefabbcf24858c1e"  # Remplace par ta clé API
 BASE_URL = "https://api.themoviedb.org/3"
 
-url = f"https://api.themoviedb.org/3/movie/popular"
-params = {
-    "api_key": API_KEY,
-    "language": "fr-FR",
-    "page": 1  # tu peux changer de page (1, 2, 3...)
-}
+@app.route('/films/<int:page>/popular', methods=['GET'])
+def get_films(page):
+    url = f"{BASE_URL}/movie/popular"
+    params = {
+        "api_key": API_KEY,
+        "language": "fr-FR",
+        "page": page
+    }
 
-response = requests.get(url, params=params)
+    response = requests.get(url, params=params)
 
-if response.status_code == 200:
-    data = response.json()
-    films = data["results"]
+    if response.status_code == 200:
+        data = response.json()
+        films = data.get("results", [])
+        print(f"Nombre de films reçus : {len(films)}")
+        # On renvoie les 10 premiers films
+        return jsonify([
+            {
+                "title": film['title'],
+                "release_date": film['release_date'],
+                "vote_average": film['vote_average'],
+                "poster_path": film.get('poster_path'),
+                "id": film.get('id')
+            } for film in films
 
-    print("📌 Films populaires :")
-    for film in films:  # affiche les 10 premiers
-        print(f"🎬 {film['title']} ({film['release_date']}) - ⭐ {film['vote_average']}")
-else:
-    print("Erreur:", response.status_code)
+        ])
+
+    else:
+        return jsonify({"error": f"Erreur {response.status_code}"}), response.status_code
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 
