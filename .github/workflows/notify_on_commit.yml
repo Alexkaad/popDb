@@ -6,8 +6,8 @@ on:
       - main
 
 permissions:
-  contents: read
   issues: write
+  contents: read
 
 jobs:
   comment:
@@ -16,7 +16,7 @@ jobs:
       - name: Add a comment to an issue
         uses: peter-evans/create-or-update-comment@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.MY_PAT }} # si fork
           repository: ${{ github.repository }}
           issue-number: 1
-          body: "📢 Nouveau commit effectué par ${{ github.actor }} !"
+          body: "📢 Notifications de commit #1 — Nouveau commit effectué par ${{ github.actor }} !"
